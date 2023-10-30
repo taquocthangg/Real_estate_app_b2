@@ -4,7 +4,7 @@ import * as ImagePicker from 'expo-image-picker';
 import { data } from '../../data';
 
 
-export default function Add_Listing({ navigation ,route }) {
+export default function Add_Listing({ navigation, route }) {
     const { title } = route.params || {};
     const { Categories } = data;
     const [images, setImages] = useState([]);
@@ -40,42 +40,46 @@ export default function Add_Listing({ navigation ,route }) {
     };
 
     return (
-        <View>
-            <View>
-                <Text>Title</Text>
-                <SafeAreaView>
+        <View style={{backgroundColor:'white'}}>
+            <View style={{ height: 80, flexDirection: 'row', alignItems: 'center', paddingLeft: 15, paddingRight: 5 ,backgroundColor:'white'}}>
+                <Text style={{ width: '59%', textAlign: 'right', fontWeight: 'bold' }}>Add Listing</Text>
+                <TouchableOpacity style={{ width: '35%', flexDirection: 'row', justifyContent: 'flex-end' }}>
+                    <Text style={{ color: '#5ED18F' }}>Cancel</Text>
+                </TouchableOpacity>
+            </View>
+            <View style = {{backgroundColor:'white'}}>
+                <View style={styles.title}>
+                    <Text style={{ fontWeight: 'bold', paddingBottom: 10 }}>Title</Text>
                     <TextInput
                         style={styles.input}
                         placeholder="864 Fulton Street"
                         keyboardType="default"
                     />
-                </SafeAreaView>
-            </View>
-            <View>
-                <Text>Description</Text>
-                <SafeAreaView>
+                </View>
+                <View style={styles.Description}>
+                    <Text style={{ fontWeight: 'bold', paddingBottom: 10 }}>Description</Text>
                     <TextInput
                         style={styles.input}
                         placeholder="Cozy apartment, in a great area - perfect for a family."
                         keyboardType="default"
                     />
-                </SafeAreaView>
+                </View>
             </View>
-            <View>
-                <View>
-                    <Text>
+
+            <View style={{ padding: 20 }}>
+                <View style={{ flexDirection: 'row', justifyContent: 'space-between', paddingTop: 20 }}>
+                    <Text style={{ fontWeight: 'bold' }}>
                         Price
                     </Text>
                     <TextInput
-                        placeholder='123$'
+                        placeholder='0$'
                         keyboardType='default'
                     />
                 </View>
-                <View>
-                    <Text>
+                <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', paddingBottom: 20, paddingTop: 20 }}>
+                    <Text style={{ fontWeight: 'bold' }}>
                         Category
                     </Text>
-
                     <Modal
                         animationType="slide"
                         transparent={true}
@@ -121,60 +125,77 @@ export default function Add_Listing({ navigation ,route }) {
                         </Text>
                     </Pressable>
                 </View>
-                <View>
-                    <Text>
+
+                <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+                    <Text style={{ fontWeight: 'bold' }}>
                         Filters
                     </Text>
                     <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('Filters')}>
-                        <Text>Press Here</Text>
+                        <Text style={{ color: '#4A4A4A' }}>2a2b10c</Text>
                     </TouchableOpacity>
                 </View>
             </View>
-            <View>
-                <Text>
+            <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', paddingBottom: 10, paddingRight: 10 }}>
+                <Text style={{ fontWeight: 'bold', paddingLeft: 20, }}>
                     Location
                 </Text>
                 <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('Map')}>
-                <Text>{title ? title : ''}</Text>
+                    <Text style={{ paddingRight: 10, color: '#4A4A4A' }}>{title ? title : 'Unknown'}</Text>
                 </TouchableOpacity>
             </View>
-            <View>
-                <TouchableOpacity onPress={() => setModalBtn(true)}>
-                    <Text>Chọn ảnh</Text>
+            <View style={{ paddingBottom: 10, paddingRight: 10, paddingLeft: 15, paddingTop: 20 }}>
+                <TouchableOpacity >
+                    <Text style={{ fontWeight: 'bold', paddingBottom: 20 }}>Add Photo</Text>
                 </TouchableOpacity>
-                <Modal
-                    animationType="slide"
-                    transparent={true}
-                    visible={modalBtn}
-                    onRequestClose={() => setModalBtn(false)}>
-                    <View style={{
-                        flex: 1,
-                        justifyContent: 'flex-end',
-                        alignItems: 'center',
-                    }}>
-                        <View style={{
-                            backgroundColor: 'white',
-                            width: '100%',
-                            borderTopLeftRadius: 20,
-                            borderTopRightRadius: 20,
-                        }}>
-                            <Button title="Mở máy ảnh" onPress={openCamera} />
-                            <Button title="Mở thư viện ảnh" onPress={openImageLibrary} />
-                            <Button title="Hủy" onPress={() => setModalBtn(false)} />
+                <View style={{ flexDirection: 'row', gap: 10 }}>
+                    <TouchableOpacity onPress={() => setModalBtn(true)}>
+                        <View style={{ padding: 18, backgroundColor: '#20C065', borderRadius: 8 }}>
+                            <Image
+                                style={styles.imgDetail}
+                                source={require('../img/icon/imageadd.png')}
+                            />
                         </View>
-                    </View>
-                </Modal>
-                <FlatList
-                    data={images}
-                    keyExtractor={(item, index) => index.toString()}
-                    horizontal
-                    renderItem={({ item }) => (
-                        <Image
-                            source={{ uri: item }}
-                            style={{ width: 100, height: 100, marginRight: 10 }}
-                        />
-                    )}
-                />
+                    </TouchableOpacity>
+                    <Modal
+                        animationType="slide"
+                        transparent={true}
+                        visible={modalBtn}
+                        onRequestClose={() => setModalBtn(false)}>
+                        <View style={{
+                            flex: 1,
+                            justifyContent: 'flex-end',
+                            alignItems: 'center',
+                        }}>
+                            <View style={{
+                                backgroundColor: 'white',
+                                width: '100%',
+                                borderTopLeftRadius: 20,
+                                borderTopRightRadius: 20,
+                            }}>
+                                <Button title="Mở máy ảnh" onPress={openCamera} />
+                                <Button title="Mở thư viện ảnh" onPress={openImageLibrary} />
+                                <Button title="Hủy" onPress={() => setModalBtn(false)} />
+                            </View>
+                        </View>
+                    </Modal>
+                    <FlatList
+                        data={images}
+                        keyExtractor={(item, index) => index.toString()}
+                        horizontal
+                        renderItem={({ item }) => (
+                            <Image
+                                source={{ uri: item }}
+                                style={{ width: 100, height: 100, marginRight: 10 }}
+                            />
+                        )}
+                    />
+
+                </View>
+            </View>
+            <View style={styles.postListing}>
+                <TouchableOpacity style={styles.button1}>
+                    <Text style={{ fontWeight: 'bold', color: '#fff' }}>Post Listing</Text>
+                </TouchableOpacity>
             </View>
         </View >
     )
@@ -186,6 +207,26 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         marginTop: 22,
+    },
+    container: {
+        flex: 1,
+        backgroundColor: '#fff',
+        flexDirection: 'column',
+        justifyContent: 'space-between'
+    },
+    Description: {
+        paddingLeft: 10,
+        paddingRight: 20,
+        paddingTop: 30,
+        paddingBottom: 30,
+        borderWidth: 10,
+        borderColor: '#EFEFEF',
+        flexDirection: 'column',
+
+
+    },
+    title: {
+        padding: 20,
     },
     modalView: {
         width: '80%',
@@ -209,17 +250,23 @@ const styles = StyleSheet.create({
     },
     button: {
         borderRadius: 20,
-        padding: 10,
-        elevation: 2,
+        // padding: 10,
+       // elevation: 2,
+        backgroundColor: 'white'
     },
     buttonOpen: {
-        backgroundColor: '#F194FF',
+        // backgroundColor: '#F194FF',
+
     },
     buttonClose: {
         backgroundColor: '#2196F3',
+        width: '90%',
+
+        paddingTop: 10,
+        paddingBottom: 10
     },
     textStyle: {
-        color: 'white',
+       // color: '#fff',
         fontWeight: 'bold',
         textAlign: 'center',
     },
@@ -228,5 +275,33 @@ const styles = StyleSheet.create({
         textAlign: 'center',
 
 
+    },
+    imgDetail: {
+        height: 65,
+        width: 65,
+    },
+    postListing: {
+        flexDirection: 'row',
+        justifyContent: 'center',
+        // marginTop:50,
+
+    },
+    button1: {
+        width: '90%',
+        flexDirection: 'row',
+        justifyContent: 'center',
+        backgroundColor: '#20C065',
+        paddingTop: 18,
+        marginTop: 5,
+        paddingBottom: 18,
+        borderRadius: 10,
+    },
+    box: {
+
+    },
+    text: {
+        color: '#4A4A4A',
+        fontSize: 18,
+        paddingBottom: 5,
     },
 })

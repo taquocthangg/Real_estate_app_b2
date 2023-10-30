@@ -9,9 +9,9 @@ export default function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator>
-        <Stack.Screen name="Add_Listing" component={Add_Listing} />
-        <Stack.Screen name="Filters" component={Filters} />
-        <Stack.Screen name="Map" component={Map} />
+        <Stack.Screen name="Add_Listing" component={Add_Listing} options={{headerShown:false}} />
+        <Stack.Screen name="Filters" component={Filters} options={{headerShown:false}} />
+        <Stack.Screen name="Map" component={Map} options={{headerShown:false}} />
       </Stack.Navigator>
     </NavigationContainer>
   );
