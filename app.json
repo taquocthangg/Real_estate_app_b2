@@ -11,6 +11,19 @@
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
+    
+    "plugins": [
+      [
+        "expo-image-picker",
+        {
+          "photosPermission": "custom photos permission",
+          "cameraPermission": "Allow $(PRODUCT_NAME) to open the camera",
+
+          "//": "Disables the microphone permission",
+          "microphonePermission": false
+        }
+      ]
+    ],
     "assetBundlePatterns": [
       "**/*"
     ],
@@ -18,6 +31,7 @@
       "supportsTablet": true
     },
     "android": {
+      "permissions": ["CAMERA", "READ_EXTERNAL_STORAGE"],
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
